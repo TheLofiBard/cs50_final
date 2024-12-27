@@ -1,0 +1,16 @@
+<!-- This template extends from layout.html -->
+{% extends "layout.html" %}
+
+<!-- This block sets the title of the page -->
+{% block title %}Monsters{% endblock %}
+
+<!-- This block contains the main content of the page -->
+{% block main %}
+    <h1>Monsters</h1>
+    <ul>
+        <!-- This loop iterates over the monsters list and displays each monster's name -->
+        {% for monster in monsters %}
+            <li>{{ monster.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
