@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
@@ -23,24 +23,102 @@
             </div>
         </nav>
     </header>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="container my-2">
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
     <main>
         <div class="container my-2">
+            <h1 class="py-1">The D&D 5e Calculator</h1>
             {% block main %}
-            <h1 class="py-1">The D&D 5e Combat Calculator</h1>
-            <form action="/party">
-                <input type="text" name="party_size" placeholder="Number of party Members">
-                <input type="text" name="party_level"placeholder="Character Level">
+            <form action="/party_cr" method="post">
+                <input type="text" name="party_size" id="party_size" placeholder="Number of party Members">
+                <input type="text" name="party_level" id="party_level" placeholder="Character Level">
                 <button class="btn btn-primary" type="submit">Submit</button>
             </form>
+            <div>
+                <p>Easy: {{ easy_cr }}</p>
+                <p>Medium: {{ medium_cr }}</p>
+                <p>Hard: {{ hard_cr }}</p>
+                <p>Deadly: {{ deadly_cr }}</p>
+            </div>
         </div>
         <div class="container my-2">
-            <form action="/monsters">
-                <input type="text" name="monster_exp" placeholder="Monster Exp">
-                <input type="text" name="monter_count" placeholder="Number of Monsters">
+            <form action="/monsters_cr" method="post">
+                <div id="monster_inputs">
+                    <input type="text" name="monster_count[]" placeholder="Number of Monster">
+                    <input type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
+                </div>
                 <button class="btn btn-primary" type="submit">Submit</button>
+                <button class="btn btn-primary" type="button" onclick="addMonsterInput()">Add Another Monster</button>
             </form>
+            <div>
+                <p>Total Exp: {{ total_exp }}</p>
+            </div>
+            <button class="btn btn-primary" type="button" onclick="submitCombinedForm()">Calculate</button>
+            <form id="combinedForm" action="/combined_submit" method="post" style="display:none;">
+                <input type="hidden" name="party_size" id="combined_party_size">
+                <input type="hidden" name="party_level" id="combined_party_level">
+                <div id="combined_monster_inputs"></div>
+            </form>
+            <p>Combat Difficulty Rating: {{ rating }}</p>
             {% endblock %}
         </div>
     </main>
+<script>
+    function addMonsterInput() {
+            var monsterInputs = document.getElementById('monster_inputs');
+            var newInput = document.createElement('div');
+            newInput.classList.add('monster_input');
+            newInput.innerHTML = `
+                <input type="text" name="monster_count[]" placeholder="Number of Monsters">
+                <input type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
+            `;
+            monsterInputs.appendChild(newInput);
+    }
+
+    function submitCombinedForm() {
+            // Get values from party_cr form
+            var party_size = document.getElementById('party_size').value;
+            var party_level = document.getElementById('party_level').value;
+
+            // Set values in combinedForm
+            document.getElementById('combined_party_size').value = party_size;
+            document.getElementById('combined_party_level').value = party_level;
+            
+            // Get monster inputs
+            var monsterInputs = document.querySelectorAll('#monster_inputs .monster_input');
+            var combinedMonsterInputs = document.getElementById('combined_monster_inputs');
+            combinedMonsterInputs.innerHTML = ''; // Clear previous inputs
+
+            monsterInputs.forEach(function(input) {
+                var monsterCount = input.querySelector('input[name="monster_count[]"]').value;
+                var monsterExp = input.querySelector('input[name="monster_exp[]"]').value;
+
+                var countInput = document.createElement('input');
+                countInput.type = 'hidden';
+                countInput.name = 'monster_count[]';
+                countInput.value = monsterCount;
+
+                var expInput = document.createElement('input');
+                expInput.type = 'hidden';
+                expInput.name = 'monster_exp[]';
+                expInput.value = monsterExp;
+
+                combinedMonsterInputs.appendChild(countInput);
+                combinedMonsterInputs.appendChild(expInput);
+            });
+
+            // Submit combinedForm
+            document.getElementById('combinedForm').submit();
+        }
+</script>
 </body>
 </html>
