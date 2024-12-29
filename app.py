@@ -11,12 +11,13 @@ app.secret_key = 'dnd_combat_calculator'
 
 
 db = SQL("sqlite:///character_exp_thresh.db")
+monsters_db = SQL("sqlite:///monsters.db")
 
 data_file = 'srd_5e_monsters.json'
 
-def read_json(file_path):
-    with open(file_path, 'r') as file:
-        return json.load(file)
+# def read_json(file_path):
+#     with open(file_path, 'r') as file:
+#         return json.load(file)
 
 @app.before_request
 def clear_session_on_home():
@@ -110,7 +111,7 @@ def combined_submit():
     if request.method == 'POST':
 
        
-        if request.form.get('party_size') and request.form.get('party_level') and request.form.get('monster_count') and request.form.get('monster_exp'):
+        if request.form.get('party_size') and request.form.get('party_level') and request.form.getlist('monster_count[]') and request.form.getlist('monster_exp[]'):
 
             party_size = request.form.get('party_size')
             party_level = request.form.get('party_level')
@@ -132,7 +133,7 @@ def combined_submit():
 
             # run calculate_part_cr and calculate_monster_cr functions
             easy_cr, medium_cr, hard_cr, deadly_cr = calculate_party_cr(party_size, party_level)
-            total_exp = sum(calculate_monster_cr(count, exp) for count, exp in zip(monster_counts, monster_exps))
+            total_exp = calculate_monster_cr(monster_counts, monster_exps)
 
             if not total_exp:
                 flash("Please enter a valid number for monster count and monster exp")
@@ -140,10 +141,6 @@ def combined_submit():
             
             elif not easy_cr or not medium_cr or not hard_cr or not deadly_cr:
                 flash("Please enter a valid number for party size and party level")
-                return redirect("/")
-            
-            elif not session.get("total_exp") or not session.get("easy_cr") or not session.get("medium_cr") or not session.get("hard_cr") or not session.get("deadly_cr"):
-                flash("Please enter valid numbers for party size, party level, monster count, and monster exp")
                 return redirect("/")
             
             if total_exp <= easy_cr:
@@ -199,7 +196,7 @@ def combined_submit():
 
 @app.route("/monsters", methods=['GET'])
 def monsters():
-    monsters = read_json(data_file)
+    monsters = monsters_db.execute("SELECT * FROM monsters")
     return render_template("monsters.html", monsters=monsters)
 
 if __name__ == '__main__':

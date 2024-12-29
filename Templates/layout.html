@@ -57,7 +57,8 @@
                     <input type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
                 </div>
                 <button class="btn btn-primary" type="submit">Submit</button>
-                <button class="btn btn-primary" type="button" onclick="addMonsterInput()">Add Another Monster</button>
+                <button class="btn btn-primary" type="button" onclick="addMonsterInput()">Add Monster</button>
+                <button class="btn btn-primary" type="button" onclick="removeMonsterInput()">Remove Monster</button>
             </form>
             <div>
                 <p>Total Exp: {{ total_exp }}</p>
@@ -82,6 +83,14 @@
                 <input type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
             `;
             monsterInputs.appendChild(newInput);
+    }
+
+    function removeMonsterInput() {
+        var monsterInputs = document.getElementById('monster_inputs');
+        var lastInput = monsterInputs.querySelector('.monster_input:last-child');
+        if (lastInput) {
+            monsterInputs.removeChild(lastInput);
+        }
     }
 
     function submitCombinedForm() {

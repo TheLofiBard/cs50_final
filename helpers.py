@@ -11,21 +11,24 @@ def calculate_party_cr(party_size, party_level):
     return easy_cr, medium_cr, hard_cr, deadly_cr
 
 def calculate_monster_cr(monster_counts, monster_exps):
-    total_exp = 0
-    for count, exp in zip(monster_counts, monster_exps):
-        if count == 1:
-            total_exp += exp
-        elif count == 2:
-            total_exp += exp * 1.5
-        elif count >= 3 and count <= 6:
-            total_exp += (exp * count) * 2
-        elif count >= 7 and count <= 10:
-            total_exp += (exp * count) * 2.5
-        elif count >= 11 and count <= 14:
-            total_exp += (exp * count) * 3
-        elif count >= 15:
-            total_exp += (exp * count) * 4
-        else:
-            flash("Please enter a valid number for monster count")
-            return None
+    total_exp = sum(count * exp for count, exp in zip(monster_counts, monster_exps))
+    total_monsters = sum(monster_counts)
+
+    if total_monsters == 1:
+        multiplier = 1
+    elif total_monsters == 2:
+        multiplier = 1.5
+    elif 3 <= total_monsters <= 6:
+        multiplier = 2
+    elif 7 <= total_monsters <= 10:
+        multiplier = 2.5
+    elif 11 <= total_monsters <= 14:
+        multiplier = 3
+    elif total_monsters >= 15:
+        multiplier = 4
+    else:
+        flash("Please enter a valid number for monster count")
+        return None
+
+    total_exp *= multiplier
     return total_exp
