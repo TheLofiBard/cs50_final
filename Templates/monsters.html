@@ -6,194 +6,213 @@
 
 <!-- This block contains the main content of the page -->
 {% block main %}
-<h1>Monsters</h1>
 <form action="/monsters" method="get">
-    <div class="form-group">
-        <label for="min_cr">Minimum CR:</label>
-        <select name="min_cr" id="min_cr" class="form-control">
-            <option value="">Please Select Min CR/exp</option>
-            <option value="0">0 (0-10 XP)</option>
-            <option value="1/8">1/8 (25 XP)</option>
-            <option value="1/4">1/4 (50 XP)</option>
-            <option value="1/2">1/2 (100 XP)</option>
-            <option value="1">1 (200 XP)</option>
-            <option value="2">2 (450 XP)</option>
-            <option value="3">3 (700 XP)</option>
-            <option value="4">4 (1,100 XP)</option>
-            <option value="5">5 (1,800 XP)</option>
-            <option value="6">6 (2,300 XP)</option>
-            <option value="7">7 (2,900 XP)</option>
-            <option value="8">8 (3,900 XP)</option>
-            <option value="9">9 (5,000 XP)</option>
-            <option value="10">10 (5,900 XP)</option>
-            <option value="11">11 (7,200 XP)</option>
-            <option value="12">12 (8,400 XP)</option>
-            <option value="13">13 (10,000 XP)</option>
-            <option value="14">14 (11,500 XP)</option>
-            <option value="15">15 (13,000 XP)</option>
-            <option value="16">16 (15,000 XP)</option>
-            <option value="17">17 (18,000 XP)</option>
-            <option value="18">18 (20,000 XP)</option>
-            <option value="19">19 (22,000 XP)</option>
-            <option value="20">20 (25,000 XP)</option>
-            <option value="21">21 (33,000 XP)</option>
-            <option value="22">22 (41,000 XP)</option>
-            <option value="23">23 (50,000 XP)</option>
-            <option value="24">24 (62,000 XP)</option>
-            <option value="25">25 (75,000 XP)</option>
-            <option value="26">26 (90,000 XP)</option>
-            <option value="27">27 (105,000 XP)</option>
-            <option value="28">28 (120,000 XP)</option>
-            <option value="29">29 (135,000 XP)</option>
-            <option value="30">30 (155,000 XP)</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="max_cr">Maximum CR:</label>
-        <select name="max_cr" id="max_cr" class="form-control">
-            <option value="">Please Select Max CR/exp</option>
-            <option value="0">0 (0-10 XP)</option>
-            <option value="1/8">1/8 (25 XP)</option>
-            <option value="1/4">1/4 (50 XP)</option>
-            <option value="1/2">1/2 (100 XP)</option>
-            <option value="1">1 (200 XP)</option>
-            <option value="2">2 (450 XP)</option>
-            <option value="3">3 (700 XP)</option>
-            <option value="4">4 (1,100 XP)</option>
-            <option value="5">5 (1,800 XP)</option>
-            <option value="6">6 (2,300 XP)</option>
-            <option value="7">7 (2,900 XP)</option>
-            <option value="8">8 (3,900 XP)</option>
-            <option value="9">9 (5,000 XP)</option>
-            <option value="10">10 (5,900 XP)</option>
-            <option value="11">11 (7,200 XP)</option>
-            <option value="12">12 (8,400 XP)</option>
-            <option value="13">13 (10,000 XP)</option>
-            <option value="14">14 (11,500 XP)</option>
-            <option value="15">15 (13,000 XP)</option>
-            <option value="16">16 (15,000 XP)</option>
-            <option value="17">17 (18,000 XP)</option>
-            <option value="18">18 (20,000 XP)</option>
-            <option value="19">19 (22,000 XP)</option>
-            <option value="20">20 (25,000 XP)</option>
-            <option value="21">21 (33,000 XP)</option>
-            <option value="22">22 (41,000 XP)</option>
-            <option value="23">23 (50,000 XP)</option>
-            <option value="24">24 (62,000 XP)</option>
-            <option value="25">25 (75,000 XP)</option>
-            <option value="26">26 (90,000 XP)</option>
-            <option value="27">27 (105,000 XP)</option>
-            <option value="28">28 (120,000 XP)</option>
-            <option value="29">29 (135,000 XP)</option>
-            <option value="30">30 (155,000 XP)</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="armor_class">Armor Class:</label>
-        <select name="armor_class" id="armor_class" class="form-control">
-            <option value="">Please Select Armor Class</option>
-            <option value="0">0</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-            <option value="27">27</option>
-            <option value="28">28</option>
-            <option value="29">29</option>
-            <option value="30+">30+</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="min_hp">Minimum Hit Points</label>
-        <select name="min_hp" id="min_hp" class="form-control">
-            <option value="">Please Select Min HP</option>
-            <option value="0">0</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="150">150</option>
-            <option value="200">200</option>
-            <option value="250">250</option>
-            <option value="300">300</option>
-            <option value="350">350</option>
-            <option value="400">400</option>
-            <option value="450">450</option>
-            <option value="500">500</option>
-            <option value="600">600</option>
-            <option value="700">700</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="max_hp">Maximum Hit Points</label>
-        <select name="max_hp" id="max_hp" class="form-control">
-            <option value="">Please Select Max HP</option>
-            <option value="0">0</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="150">150</option>
-            <option value="200">200</option>
-            <option value="250">250</option>
-            <option value="300">300</option>
-            <option value="350">350</option>
-            <option value="400">400</option>
-            <option value="450">450</option>
-            <option value="500">500</option>
-            <option value="600">600</option>
-            <option value="700">700</option> 
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="type">Monster Type:</label>
-        <select name="type" id="type" class="form-control">
-            <option value="">Please Select Monster Type</option>
-            <option value="aberration">Aberration</option>
-            <option value="beast">Beast</option>
-            <option value="celestial">Celestial</option>
-            <option value="construct">Construct</option>
-            <option value="dragon">Dragon</option>
-            <option value="elemental">Elemental</option>
-            <option value="fey">Fey</option>
-            <option value="fiend">Fiend</option>
-            <option value="giant">Giant</option>
-            <option value="humanoid">Humanoid</option>
-            <option value="monstrosity">Monstrosity</option>
-            <option value="ooze">Ooze</option>
-            <option value="plant">Plant</option>
-            <option value="undead">Undead</option>
-        </select>
-    </div>
-    <div class="form_group">
-        <label for="name">Monster Name:</label>
-        <input type="text" name="name" id="name" class="form-control">
-    </div>
+    <fieldset>
+        <legend>Search for Monsters</legend>
+            <div class="row g-3 mt-2">
+                <div class="form-group col">
+                    <!-- min cr -->
+                    <label for="min_cr" clas="form-label">Minimum CR:</label>
+                    <select name="min_cr" id="min_cr" class="form-select">
+                        <option value="">Please Select Min CR/exp</option>
+                        <option value="0">0 (0-10 XP)</option>
+                        <option value="1/8">1/8 (25 XP)</option>
+                        <option value="1/4">1/4 (50 XP)</option>
+                        <option value="1/2">1/2 (100 XP)</option>
+                        <option value="1">1 (200 XP)</option>
+                        <option value="2">2 (450 XP)</option>
+                        <option value="3">3 (700 XP)</option>
+                        <option value="4">4 (1,100 XP)</option>
+                        <option value="5">5 (1,800 XP)</option>
+                        <option value="6">6 (2,300 XP)</option>
+                        <option value="7">7 (2,900 XP)</option>
+                        <option value="8">8 (3,900 XP)</option>
+                        <option value="9">9 (5,000 XP)</option>
+                        <option value="10">10 (5,900 XP)</option>
+                        <option value="11">11 (7,200 XP)</option>
+                        <option value="12">12 (8,400 XP)</option>
+                        <option value="13">13 (10,000 XP)</option>
+                        <option value="14">14 (11,500 XP)</option>
+                        <option value="15">15 (13,000 XP)</option>
+                        <option value="16">16 (15,000 XP)</option>
+                        <option value="17">17 (18,000 XP)</option>
+                        <option value="18">18 (20,000 XP)</option>
+                        <option value="19">19 (22,000 XP)</option>
+                        <option value="20">20 (25,000 XP)</option>
+                        <option value="21">21 (33,000 XP)</option>
+                        <option value="22">22 (41,000 XP)</option>
+                        <option value="23">23 (50,000 XP)</option>
+                        <option value="24">24 (62,000 XP)</option>
+                        <option value="25">25 (75,000 XP)</option>
+                        <option value="26">26 (90,000 XP)</option>
+                        <option value="27">27 (105,000 XP)</option>
+                        <option value="28">28 (120,000 XP)</option>
+                        <option value="29">29 (135,000 XP)</option>
+                        <option value="30">30 (155,000 XP)</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <!-- max cr -->
+                    <label for="max_cr" class="form-label">Maximum CR:</label>
+                    <select name="max_cr" id="max_cr" class="form-select">
+                        <option value="">Please Select Max CR/exp</option>
+                        <option value="0">0 (0-10 XP)</option>
+                        <option value="1/8">1/8 (25 XP)</option>
+                        <option value="1/4">1/4 (50 XP)</option>
+                        <option value="1/2">1/2 (100 XP)</option>
+                        <option value="1">1 (200 XP)</option>
+                        <option value="2">2 (450 XP)</option>
+                        <option value="3">3 (700 XP)</option>
+                        <option value="4">4 (1,100 XP)</option>
+                        <option value="5">5 (1,800 XP)</option>
+                        <option value="6">6 (2,300 XP)</option>
+                        <option value="7">7 (2,900 XP)</option>
+                        <option value="8">8 (3,900 XP)</option>
+                        <option value="9">9 (5,000 XP)</option>
+                        <option value="10">10 (5,900 XP)</option>
+                        <option value="11">11 (7,200 XP)</option>
+                        <option value="12">12 (8,400 XP)</option>
+                        <option value="13">13 (10,000 XP)</option>
+                        <option value="14">14 (11,500 XP)</option>
+                        <option value="15">15 (13,000 XP)</option>
+                        <option value="16">16 (15,000 XP)</option>
+                        <option value="17">17 (18,000 XP)</option>
+                        <option value="18">18 (20,000 XP)</option>
+                        <option value="19">19 (22,000 XP)</option>
+                        <option value="20">20 (25,000 XP)</option>
+                        <option value="21">21 (33,000 XP)</option>
+                        <option value="22">22 (41,000 XP)</option>
+                        <option value="23">23 (50,000 XP)</option>
+                        <option value="24">24 (62,000 XP)</option>
+                        <option value="25">25 (75,000 XP)</option>
+                        <option value="26">26 (90,000 XP)</option>
+                        <option value="27">27 (105,000 XP)</option>
+                        <option value="28">28 (120,000 XP)</option>
+                        <option value="29">29 (135,000 XP)</option>
+                        <option value="30">30 (155,000 XP)</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <!-- armor class -->
+                    <label for="armor_class" class="form-label">Armor Class:</label>
+                    <select name="armor_class" id="armor_class" class="form-select">
+                        <option value="">Please Select Armor Class</option>
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30+">30+</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row g-3 mt-2">
+                <div class="form-group col">
+                    <!-- min hp -->
+                    <label for="min_hp" class="form-label">Minimum Hit Points</label>
+                    <select name="min_hp" id="min_hp" class="form-select">
+                        <option value="">Please Select Min HP</option>
+                        <option value="0">0</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="300">300</option>
+                        <option value="350">350</option>
+                        <option value="400">400</option>
+                        <option value="450">450</option>
+                        <option value="500">500</option>
+                        <option value="600">600</option>
+                        <option value="700">700</option>
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <!-- max hp -->
+                    <label for="max_hp" class="form-label">Maximum Hit Points</label>
+                    <select name="max_hp" id="max_hp" class="form-select">
+                        <option value="">Please Select Max HP</option>
+                        <option value="0">0</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="150">150</option>
+                        <option value="200">200</option>
+                        <option value="250">250</option>
+                        <option value="300">300</option>
+                        <option value="350">350</option>
+                        <option value="400">400</option>
+                        <option value="450">450</option>
+                        <option value="500">500</option>
+                        <option value="600">600</option>
+                        <option value="700">700</option> 
+                    </select>
+                </div>
+                <div class="form-group col">
+                    <!-- type -->
+                    <label for="type" class="form-label">Monster Type:</label>
+                    <select name="type" id="type" class="form-select">
+                        <option value="">Please Select Monster Type</option>
+                        <option value="aberration">Aberration</option>
+                        <option value="beast">Beast</option>
+                        <option value="celestial">Celestial</option>
+                        <option value="construct">Construct</option>
+                        <option value="dragon">Dragon</option>
+                        <option value="elemental">Elemental</option>
+                        <option value="fey">Fey</option>
+                        <option value="fiend">Fiend</option>
+                        <option value="giant">Giant</option>
+                        <option value="humanoid">Humanoid</option>
+                        <option value="monstrosity">Monstrosity</option>
+                        <option value="ooze">Ooze</option>
+                        <option value="plant">Plant</option>
+                        <option value="undead">Undead</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row g-3 mt-2">
+                <div class="form_group col-md-4">
+                    <!-- name -->
+                    <label for="name" class="form-label">Monster Name:</label>
+                    <input type="text" name="name" id="name" class="form-control">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary my-2">Search</button>
+                </div>
+            </div> 
+            
+    </fieldset>
 </form>
 <!-- This loop iterates over the monsters list and displays each monster's details -->
 {% for monster in monsters %}
-<div class="container-fluid my-2">
-    <ul>
+<div class="container-fluid my-2 border">
+    <ul class="list-unstyled">
         <li><strong>Name:</strong> {{ monster['name'] }}</li>
         <li><strong>Meta:</strong> {{ monster['meta'] }}</li>
         <li><strong>Armor Class:</strong> {{ monster['armor_class'] }}</li>
@@ -213,7 +232,7 @@
         <li><strong>Traits:</strong> {{ monster['traits']|safe }}</li>
         <li><strong>Actions:</strong> {{ monster['actions']|safe }}</li>
         <li><strong>Legendary Actions:</strong> {{ monster['legendary_actions']|safe }}</li>
-        <li><strong>Image:</strong> <img src="{{ monster['img_url'] }}" alt="{{ monster['name'] }}"></li>
+        <li><img src="{{ monster['img_url'] }}" alt="{{ monster['name'] }}"></li>
     </ul>
 </div>
 {% endfor %}

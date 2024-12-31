@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Combat Calculator</title>
 </head>
 <body>
+    <!-- navbar -->
     <header>
         <nav class="nav">
             <div class="container-fluid">
-                <ul class="nav justify-content-center">
+                <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Combat Calculator</a>
+                        <a class="nav-link text-dark" href="/">Combat Calculator</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/monsters">Monster Database</a>
+                        <a class="nav-link text-dark" href="/monsters">Monster Database</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+    <!-- flash messages -->
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         <div class="container my-2">
@@ -36,55 +37,99 @@
     {% endwith %}
     <main>
         <div class="container my-2">
-            <h1 class="py-1">The D&D 5e Calculator</h1>
+            <h1 class="py-1">The D&D 5e Combat Calculator</h1>
             {% block main %}
+            <!-- form for calculating party exp threshold -->
             <form action="/party_cr" method="post">
-                <input type="text" name="party_size" id="party_size" placeholder="Number of party Members">
-                <input type="text" name="party_level" id="party_level" placeholder="Character Level">
-                <button class="btn btn-primary" type="submit">Submit</button>
+                <fieldset class="form-group">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="party_size" id="party_size" placeholder="Number of party Members">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="party_level" id="party_level" placeholder="Character Level">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" type="submit">Submit</button>
+                        </div>                       
+                    </div>
+                </fieldset>
             </form>
-            <div>
-                <p>Easy: {{ easy_cr }}</p>
-                <p>Medium: {{ medium_cr }}</p>
-                <p>Hard: {{ hard_cr }}</p>
-                <p>Deadly: {{ deadly_cr }}</p>
+            <!-- party exp threshold results -->
+            <div class="mt-2">
+                <p>Easy: <span style="color:green">{{ easy_cr }}</span></p>
+                <p>Medium: <span style="color: rgb(238, 238, 0)">{{ medium_cr }}</span></p>
+                <p>Hard: <span style="color: rgb(255, 196, 0)">{{ hard_cr }}</span></p>
+                <p>Deadly: <span style="color:red">{{ deadly_cr }}</span></p>
             </div>
         </div>
         <div class="container my-2">
+            <!-- form for calculating monster exp total -->
             <form action="/monsters_cr" method="post">
-                <div id="monster_inputs">
-                    <input type="text" name="monster_count[]" placeholder="Number of Monster">
-                    <input type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
-                </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
-                <button class="btn btn-primary" type="button" onclick="addMonsterInput()">Add Monster</button>
-                <button class="btn btn-primary" type="button" onclick="removeMonsterInput()">Remove Monster</button>
+                <fieldset class="form-group">
+                    <div id="monster_inputs">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" name="monster_count[]" placeholder="Number of Monster">
+                            </div>                            
+                            <div class="col-md-4">
+                                <input class="form-control" type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-primary" type="submit">Submit</button> 
+                            </div> 
+                        </div>   
+                    </div>
+                    <!-- add more or remove monster inputs -->
+                    <div class="row g-2 mt-2">
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" type="button" onclick="addMonsterInput()">Add Monster</button>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" type="button" onclick="removeMonsterInput()">Remove Monster</button>
+                        </div>
+                        
+                    </div>
+                    
+                </fieldset>
             </form>
-            <div>
+            <!-- monster exp total results -->
+            <div class="mt-2">
                 <p>Total Exp: {{ total_exp }}</p>
             </div>
+            <!-- submit inputs from both forms and calculate combat difficulty rating -->
             <button class="btn btn-primary" type="button" onclick="submitCombinedForm()">Calculate</button>
             <form id="combinedForm" action="/combined_submit" method="post" style="display:none;">
                 <input type="hidden" name="party_size" id="combined_party_size">
                 <input type="hidden" name="party_level" id="combined_party_level">
                 <div id="combined_monster_inputs"></div>
             </form>
-            <p>Combat Difficulty Rating: {{ rating }}</p>
+            <!-- combat difficulty rating result -->
+            <p class="mt-4"><strong>Combat Difficulty Rating: </strong>{{ rating }}</p>
             {% endblock %}
         </div>
     </main>
 <script>
+
+    // add monster input fieds
     function addMonsterInput() {
             var monsterInputs = document.getElementById('monster_inputs');
             var newInput = document.createElement('div');
             newInput.classList.add('monster_input');
             newInput.innerHTML = `
-                <input type="text" name="monster_count[]" placeholder="Number of Monsters">
-                <input type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
+                <div class="row g-3 mt-2">
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" name="monster_count[]" placeholder="Number of Monster">
+                    </div>                            
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" name="monster_exp[]" placeholder="Monsters Experience Points">
+                    </div>
+                </div>
             `;
             monsterInputs.appendChild(newInput);
     }
 
+    // remove monster input fields
     function removeMonsterInput() {
         var monsterInputs = document.getElementById('monster_inputs');
         var lastInput = monsterInputs.querySelector('.monster_input:last-child');
@@ -93,6 +138,7 @@
         }
     }
 
+    // grav values from both forms and submit combined form
     function submitCombinedForm() {
             // Get values from party_cr form
             var party_size = document.getElementById('party_size').value;
